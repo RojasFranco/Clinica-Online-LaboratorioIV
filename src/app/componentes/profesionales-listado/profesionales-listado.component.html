@@ -1,0 +1,17 @@
+<table class="table table-success text-center table-hover">
+    <thead>
+        <th>Profesional</th>
+        <th>Especialidad/es</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of profesionales">
+            <td>{{ item.correo }}</td>
+            <td>
+                <ul *ngFor="let especialidad of item.especialidades">
+                    <li>{{ especialidad }}</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+    
+</table>

@@ -1,0 +1,22 @@
+<app-cabecera-inicial></app-cabecera-inicial>
+<div class="container mt-5">
+    <form>
+        <div class="form-group row">
+            <label for="txtCorreo" class="col-md-3">Ingrese su correo</label>
+            <input type="text" [(ngModel)]="usuario.correo" id="txtCorreo" placeholder="ejemplo@ejemplo.com" class="form-control col" name="user">
+        </div>
+
+        <div class="form-group row my-4">
+            <label for="txtClave" class="col-md-3">Ingrese su clave</label>
+            <input type="password" [(ngModel)]="usuario.clave" id="txtClave" placeholder="Ingrese su clave..." class="form-control col" name="pass">
+        </div>
+
+        <div class="text-center">            
+            <button (click)="Ingresar()" class="btn btn-success">Ingresar</button>            
+            <a [routerLink]="[ '/registro']" class="d-block my-3">¡Quiero registrarme!</a>
+        </div>
+    </form>
+
+    <p [ngClass]="claseMsje">{{ mensajeMostrar }}</p>
+    <a *ngIf="solicitudReenvio" (click)="ReenviarMail()" class="d-block mt-3">Reenviar Mail de verificacion</a>
+</div>

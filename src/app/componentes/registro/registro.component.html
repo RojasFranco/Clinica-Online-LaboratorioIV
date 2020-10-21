@@ -1,0 +1,55 @@
+<app-cabecera-inicial></app-cabecera-inicial>
+<div class="container mt-5">
+    <form>
+        <div class="form-group row">
+            <label for="txtCorreo" class="col-md-3">Ingrese su correo</label>
+            <input type="text" [(ngModel)]="usuario.correo" id="txtCorreo" placeholder="ejemplo@ejemplo.com" class="form-control col" name="user">
+        </div>
+
+        <div class="form-group row my-4">
+            <label for="txtClave" class="col-md-3">Ingrese su clave</label>
+            <input type="password" [(ngModel)]="usuario.clave" id="txtClave" placeholder="Ingrese su clave..." class="form-control col" name="pass">
+        </div>
+
+        <div class="form-group row">
+            <label for="selectPerfil" class="col-md-3">Seleccione su perfil</label>
+            <select id="selectPerfil" class="form-control col" [(ngModel)]="perfilElegido" name="selectPerfil">
+                <option *ngFor="let item of perfiles" [value]="item">{{ item }}</option>
+            </select>
+        </div>
+
+        <div *ngIf="perfilElegido=='paciente'">
+            <div class="row  my-4">
+                <label for="imgPerfil" class="col-lg-4">Seleccione su foto de perfil</label>
+                <input type="file" name="img" (change)= "CargaImagen($event.target)" class="col">
+                <img id="imgPerfil" alt="" class="imgPerfil">
+            </div>
+            <div class="row">       
+                <label for="imgPerfilDos" class="col-lg-4">Seleccione su foto alternativa</label>
+                <input type="file" (change) = "CargarAlternativa($event.target)" class="col">
+                <img alt=""id="imgPerfilDos" class="imgPerfil">
+            </div>
+        </div>
+
+        <div  *ngIf="perfilElegido=='profesional'">
+            <div class="row  my-4">
+                <label for="" class="col-md-4">Seleccione su/s especialidad/es</label>
+                <div>
+                    <div class="form-check form-group" *ngFor="let item of especialidades">
+                        <input type="checkbox" class="form-check-input" (change)="ElegirCheck($event.target)" [value]="item">
+                        <label for="" class="form-check-label">{{item}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="text-center my-4">
+            <button type="button" (click)="Registrar()" class="btn btn-success">Registrar</button>
+            <button type="button" routerLink="/login" class="btn btn-info ml-5">Volver</button>
+        </div>
+
+        <p [ngClass]="claseMsje">{{ mensajeMostrar }}</p>
+    </form>
+    
+</div>

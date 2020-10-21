@@ -1,0 +1,23 @@
+<div class="mt-5 row mx-0">
+    <form class="col-7">
+        <h2 class="text-center mb-5">Nueva especialidad  </h2>
+        <div class="form-group">
+            <label for="txtNombre">Nombre Especialidad</label>
+            <input type="text" [(ngModel)]="nuevaEspecialidad" name="esp" id="txtNombre" class="form-control" placeholder="Ingrese el nombre...">
+        </div>
+        <div class="text-center mb-3">
+            <button type="button" (click)="Agregar()" class="btn btn-success">Agregar</button>
+        </div>
+        <p *ngIf="mostrarMje" [ngClass]="claseMje">{{mensaje}}</p>
+    </form>
+
+    <div class="col">
+        <h2 class=" text-center mb-5">Especialidades actuales</h2>        
+        <table class="table text-center">
+            <th>Nombre</th>
+            <tr *ngFor="let item of especialidades">
+                <td>{{ item.toUpperCase() }}</td>
+            </tr>
+        </table>
+    </div>
+</div>

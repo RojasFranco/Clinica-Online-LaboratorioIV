@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Profesional } from 'src/app/clases/profesional';
 import { CloudFirestoreService } from 'src/app/servicios/cloud-firestore.service';
 
@@ -9,6 +9,7 @@ import { CloudFirestoreService } from 'src/app/servicios/cloud-firestore.service
 })
 export class ProfesionalesListadoComponent implements OnInit {
 
+  @Output() eventoElegirProfesional: EventEmitter<Profesional> = new EventEmitter();
   @Input() aprobados: boolean;
   profesionales: Array<Profesional>;  
 
@@ -18,10 +19,13 @@ export class ProfesionalesListadoComponent implements OnInit {
 
   async ngOnInit(){
     this.db.ObtenerTodosTiempoReal("usuarios").subscribe(snap=>{
+      this.profesionales = [];
       snap.forEach(rta=>{
         if(rta.payload.doc.get("rol")=="profesional" && rta.payload.doc.get("aprobado")==this.aprobados){
-          let profesional = new Profesional();
+          let profesional = new Profesional();          
           profesional.correo = rta.payload.doc.id;
+          profesional.nombre = rta.payload.doc.get("nombre");
+          profesional.apellido = rta.payload.doc.get("apellido");
           profesional.especialidades = rta.payload.doc.get("especialidades");
           this.profesionales.push(profesional);
         }
@@ -29,6 +33,8 @@ export class ProfesionalesListadoComponent implements OnInit {
     });
   }
 
-
+  SeleccionarProfesional(profesional: Profesional){
+    this.eventoElegirProfesional.emit(profesional);
+  }
 
 }

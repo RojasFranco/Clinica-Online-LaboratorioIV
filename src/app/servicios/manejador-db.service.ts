@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Administrador } from '../clases/administrador';
 import { Paciente } from '../clases/paciente';
 import { Profesional } from '../clases/profesional';
 import { CloudFirestoreService } from './cloud-firestore.service';
@@ -18,6 +19,8 @@ export class ManejadorDbService {
 
   AgregarPaciente(paciente: Paciente){
     let pacienteAgregar = {
+      nombre: paciente.nombre,
+      apellido: paciente.apellido,
       correo: paciente.correo,
       rol: "paciente",
       foto: paciente.foto,
@@ -28,12 +31,24 @@ export class ManejadorDbService {
 
   AgregarProfesional(profesional: Profesional){
     let profesionalAgregar = {
+      nombre: profesional.nombre,
+      apellido: profesional.apellido,
       correo: profesional.correo,
       rol: "profesional",
       aprobado: profesional.aprobado,
       especialidades: profesional.especialidades
     }
     return this.db.AgregarConId(this.coleccionUsuarios, profesional.correo, profesionalAgregar);
+  }
+
+  AgregarAdministrador(admin: Administrador){
+    let adminAgregar = {
+      nombre: admin.nombre,
+      apellido: admin.apellido,
+      correo: admin.correo,
+      rol: "administrador"
+    };
+    return this.db.AgregarConId(this.coleccionUsuarios, admin.correo, adminAgregar);
   }
 
   ActualizarProfesional(profesional: Profesional){

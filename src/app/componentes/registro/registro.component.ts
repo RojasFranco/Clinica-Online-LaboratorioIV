@@ -3,6 +3,7 @@ import { Paciente } from 'src/app/clases/paciente';
 import { Profesional } from 'src/app/clases/profesional';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { CloudFirestoreService } from 'src/app/servicios/cloud-firestore.service';
 import { ManejadorDbService } from 'src/app/servicios/manejador-db.service';
 
 @Component({
@@ -19,22 +20,30 @@ export class RegistroComponent implements OnInit {
   perfilElegido: string;
   urlPrimerImg: string;
   urlSegundaImg: string;
-  especialidades = ["Odontologia", "Pediatra"];
+  // especialidades = ["Odontologia", "Pediatra"];
+  especialidades = Array<string>();
   especialidadesElegidas: Array<string>;
   coleccionProfesionales: string;
   coleccionPacientes: string;
   fileFoto: File;
   fileFotoDos: File;
-  constructor(private auth: AuthService, private db: ManejadorDbService) {
+  constructor(private auth: AuthService, private db: ManejadorDbService, private cloud: CloudFirestoreService) {
     this.usuario = new Usuario();
     this.especialidadesElegidas = new Array<string>();
    }
 
-  ngOnInit(): void {
+  async ngOnInit(){
+    this.cloud.ObtenerTodosTiempoReal("especialidades").subscribe(snap=>{
+      this.especialidades = [];
+      snap.forEach(rta=>{
+        let especialidad = rta.payload.doc.get("nombre");
+        this.especialidades.push(especialidad);
+      })
+    });
   }
 
   async Registrar(){    
-    if(this.usuario.correo && this.usuario.clave){
+    if(this.usuario.correo && this.usuario.clave && this.usuario.nombre && this.usuario.apellido){
       if(this.perfilElegido=="paciente"){
         if(this.urlPrimerImg && this.urlSegundaImg){
           this.RegistrarFirebase();
@@ -73,6 +82,8 @@ export class RegistroComponent implements OnInit {
         paciente.correo = emailUser;
         paciente.foto = urlFoto;
         paciente.fotoDos = urlFotoDos;
+        paciente.nombre = this.usuario.nombre;
+        paciente.apellido = this.usuario.apellido;
         this.db.AgregarPaciente(paciente);
         this.mensajeMostrar = "Se envio un email a su correo para confirmar registro, por favor revise su correo";
       }
@@ -80,6 +91,8 @@ export class RegistroComponent implements OnInit {
         let profesional = new Profesional();
         profesional.correo = emailUser;
         profesional.especialidades = this.especialidadesElegidas;
+        profesional.nombre = this.usuario.nombre;
+        profesional.apellido = this.usuario.apellido;
         this.db.AgregarProfesional(profesional);
         this.mensajeMostrar = "Cuenta creada exitosamente, solo falta aprobacion de administrador para ejercer";
       }

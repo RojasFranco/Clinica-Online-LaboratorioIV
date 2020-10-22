@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Profesional } from 'src/app/clases/profesional';
 
 @Component({
   selector: 'app-profesionales-listado-pendientes',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfesionalesListadoPendientesComponent implements OnInit {
 
+  profesionalElegido: Profesional;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ElegirProfesional(profesional: Profesional){
+    this.profesionalElegido = profesional;
   }
 
 }

@@ -19,8 +19,10 @@ import { ProfesionalCabeceraComponent } from './componentes/profesional-cabecera
 import { ProfesionalesListadoComponent } from './componentes/profesionales-listado/profesionales-listado.component';
 import { ProfesionalesListadoPendientesComponent } from './componentes/profesionales-listado-pendientes/profesionales-listado-pendientes.component';
 import { EspecialidadAgregarComponent } from './componentes/especialidad-agregar/especialidad-agregar.component';
-import { AdministradorProfesionalesPendientesComponent } from './componentes/administrador-profesionales-pendientes/administrador-profesionales-pendientes.component';
 import { AdministradorAltaComponent } from './componentes/administrador-alta/administrador-alta.component';
+import { ProfesionalesListadoAprobadosComponent } from './componentes/profesionales-listado-aprobados/profesionales-listado-aprobados.component';
+import { ProfesionalesDetalleComponent } from './componentes/profesionales-detalle/profesionales-detalle.component';
+import { ProfesionalNoAprobadoComponent } from './componentes/profesional-no-aprobado/profesional-no-aprobado.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +39,10 @@ import { AdministradorAltaComponent } from './componentes/administrador-alta/adm
     ProfesionalesListadoComponent,
     ProfesionalesListadoPendientesComponent,
     EspecialidadAgregarComponent,
-    AdministradorProfesionalesPendientesComponent,
-    AdministradorAltaComponent
+    AdministradorAltaComponent,
+    ProfesionalesListadoAprobadosComponent,
+    ProfesionalesDetalleComponent,
+    ProfesionalNoAprobadoComponent
   ],
   imports: [
     BrowserModule,

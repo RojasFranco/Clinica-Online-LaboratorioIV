@@ -1,12 +1,12 @@
 <app-cabecera-inicial></app-cabecera-inicial>
-<div class="container mt-5">
-    <form>
-        <div class="form-group row">
+<div class="container">
+    <form class="border pt-4 px-4 my-4">
+        <div class="form-group form-inline">
             <label for="txtCorreo" class="col-md-3">Ingrese su correo</label>
             <input type="text" [(ngModel)]="usuario.correo" id="txtCorreo" placeholder="ejemplo@ejemplo.com" class="form-control col" name="user">
         </div>
 
-        <div class="form-group row my-4">
+        <div class="form-group form-inline my-4">
             <label for="txtClave" class="col-md-3">Ingrese su clave</label>
             <input type="password" [(ngModel)]="usuario.clave" id="txtClave" placeholder="Ingrese su clave..." class="form-control col" name="pass">
         </div>

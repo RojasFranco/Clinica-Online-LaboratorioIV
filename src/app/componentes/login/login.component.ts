@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
         let userIdentificado = (await this.db.ObtenerUsuario(usuarioActual.email)).data();
         let rolUsuario = userIdentificado.rol;
-        console.log(rolUsuario);
 
         if(rolUsuario=="paciente"){
           if(await this.auth.VerificoMail()){

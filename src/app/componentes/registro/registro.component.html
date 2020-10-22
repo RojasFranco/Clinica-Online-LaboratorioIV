@@ -1,17 +1,27 @@
 <app-cabecera-inicial></app-cabecera-inicial>
-<div class="container mt-5">
-    <form>
-        <div class="form-group row">
+<div class="container my-3">
+    <form class="border pt-4 px-4">
+        <div class="form-group form-inline">
+            <label for="txtNombre" class="col-md-3">Ingrese su nombre</label>
+            <input type="text" [(ngModel)]="usuario.nombre" id="txtNombre" placeholder="Ingrese su nombre..." class="form-control col" name="name">
+        </div>
+
+        <div class="form-group form-inline">
+            <label for="txtApellido" class="col-md-3">Ingrese su apellido</label>
+            <input type="text" [(ngModel)]="usuario.apellido" id="txtApellido" placeholder="Ingrese su apellido..." class="form-control col" name="apell">
+        </div>
+
+        <div class="form-group form-inline">
             <label for="txtCorreo" class="col-md-3">Ingrese su correo</label>
             <input type="text" [(ngModel)]="usuario.correo" id="txtCorreo" placeholder="ejemplo@ejemplo.com" class="form-control col" name="user">
         </div>
 
-        <div class="form-group row my-4">
+        <div class="form-group form-inline my-4">
             <label for="txtClave" class="col-md-3">Ingrese su clave</label>
             <input type="password" [(ngModel)]="usuario.clave" id="txtClave" placeholder="Ingrese su clave..." class="form-control col" name="pass">
         </div>
 
-        <div class="form-group row">
+        <div class="form-group form-inline">
             <label for="selectPerfil" class="col-md-3">Seleccione su perfil</label>
             <select id="selectPerfil" class="form-control col" [(ngModel)]="perfilElegido" name="selectPerfil">
                 <option *ngFor="let item of perfiles" [value]="item">{{ item }}</option>
@@ -19,12 +29,12 @@
         </div>
 
         <div *ngIf="perfilElegido=='paciente'">
-            <div class="row  my-4">
+            <div class="form-inline  my-4">
                 <label for="imgPerfil" class="col-lg-4">Seleccione su foto de perfil</label>
                 <input type="file" name="img" (change)= "CargaImagen($event.target)" class="col">
                 <img id="imgPerfil" alt="" class="imgPerfil">
             </div>
-            <div class="row">       
+            <div class="form-inline">       
                 <label for="imgPerfilDos" class="col-lg-4">Seleccione su foto alternativa</label>
                 <input type="file" (change) = "CargarAlternativa($event.target)" class="col">
                 <img alt=""id="imgPerfilDos" class="imgPerfil">
@@ -32,7 +42,7 @@
         </div>
 
         <div  *ngIf="perfilElegido=='profesional'">
-            <div class="row  my-4">
+            <div class="row my-4">
                 <label for="" class="col-md-4">Seleccione su/s especialidad/es</label>
                 <div>
                     <div class="form-check form-group" *ngFor="let item of especialidades">
@@ -44,9 +54,9 @@
         </div>
         
 
-        <div class="text-center my-4">
+        <div class="my-4 d-flex justify-content-around ">
             <button type="button" (click)="Registrar()" class="btn btn-success">Registrar</button>
-            <button type="button" routerLink="/login" class="btn btn-info ml-5">Volver</button>
+            <button type="button" routerLink="/login" class="btn btn-info">Volver</button>
         </div>
 
         <p [ngClass]="claseMsje">{{ mensajeMostrar }}</p>

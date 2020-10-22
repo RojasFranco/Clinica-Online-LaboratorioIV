@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-administrador-cabecera',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AdministradorCabeceraComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -18,7 +19,7 @@ export class AdministradorCabeceraComponent implements OnInit {
   }
 
   ProfesionalesAprobados(){
-    // this.router.navigate(["administrador/aprobados"]);
+    this.router.navigate(["administrador/aprobados"]);
   }
 
   AgregarEspecialidad(){
@@ -27,5 +28,10 @@ export class AdministradorCabeceraComponent implements OnInit {
 
   AgregarAdmin(){
     this.router.navigate(["administrador/alta"]);
+  }
+
+  async Salir(){
+    await this.auth.Desloguear();
+    this.router.navigate(['login']);
   }
 }

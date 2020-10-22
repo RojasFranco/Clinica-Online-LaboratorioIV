@@ -19,4 +19,10 @@
 
     <p [ngClass]="claseMsje">{{ mensajeMostrar }}</p>
     <a *ngIf="solicitudReenvio" (click)="ReenviarMail()" class="d-block mt-3">Reenviar Mail de verificacion</a>
+
+    <div class="d-flex justify-content-around">
+        <button (click)="CargarAdmin()" class="btn btn-dark">Admin</button>
+        <button (click)="CargarPaciente()" class="btn btn-info">Paciente</button>
+        <button (click)="CargarProfesional()" class="btn btn-secondary">Profesional</button>
+    </div>
 </div>

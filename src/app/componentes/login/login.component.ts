@@ -81,4 +81,19 @@ export class LoginComponent implements OnInit {
     this.solicitudReenvio = false;
   }
 
+  CargarAdmin(){
+    this.usuario.correo = "admin@admin.com";
+    this.usuario.clave = "clave1234";
+  }
+
+  CargarPaciente(){
+    this.usuario.correo = "Rojas.Franco.93@gmail.com";
+    this.usuario.clave = "clave1234";
+  }
+
+  CargarProfesional(){
+    this.usuario.correo = "profesional@profesional.com";
+    this.usuario.clave = "clave1234";
+  }
+
 }

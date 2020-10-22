@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { ManejadorDbService } from 'src/app/servicios/manejador-db.service';
 
@@ -13,7 +14,7 @@ export class PacienteHeaderComponent implements OnInit {
   fotoPpal: string;
   fotoDos: string;
   fotoActual: string;
-  constructor(private auth: AuthService, private db: ManejadorDbService) { }
+  constructor(private auth: AuthService, private db: ManejadorDbService, private router: Router) { }
 
   async ngOnInit(){
     let userActual = await this.auth.ObtenerActual();
@@ -30,6 +31,11 @@ export class PacienteHeaderComponent implements OnInit {
     else{
       this.fotoActual = this.fotoPpal;
     }
+  }
+
+  async Salir(){
+    await this.auth.Desloguear();
+    this.router.navigate(['login']);
   }
 
 }

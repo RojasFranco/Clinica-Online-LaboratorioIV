@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Administrador } from '../clases/administrador';
 import { Paciente } from '../clases/paciente';
 import { Profesional } from '../clases/profesional';
+import { Turno } from '../clases/turno';
 import { CloudFirestoreService } from './cloud-firestore.service';
 
 @Injectable({
@@ -11,10 +12,12 @@ export class ManejadorDbService {
 
   private coleccionUsuarios: string;
   private especialidades: string;
+  private turnos: string;
 
   constructor(private db: CloudFirestoreService) { 
     this.coleccionUsuarios = "usuarios";
     this.especialidades = "especialidades";
+    this.turnos = "turnos";
   }
 
   AgregarPaciente(paciente: Paciente){
@@ -51,6 +54,30 @@ export class ManejadorDbService {
     return this.db.AgregarConId(this.coleccionUsuarios, admin.correo, adminAgregar);
   }
 
+  AgregarTurno(turno: Turno){
+    let fecha = this.convertDate(turno.horario);
+    let hora = this.converHours(turno.horario);
+    let turnoAgregar = {
+      nombre_paciente: turno.nombre_paciente,
+      apellido_paciente: turno.apellido_paciente,
+      horario: fecha+' '+hora,
+      correo_profesional: turno.correo_profesional,
+      correo_paciente: turno.correo_paciente,
+      estado: turno.estado,
+      nombre_profesional: turno.nombre_profesional,
+      apellido_profesional: turno.apellido_profesional,
+      duracion: 30,
+    };
+    return this.db.AgregarSinId(this.turnos, turnoAgregar);
+  }
+
+  ActualizarEstadoTurno(nuevoEstado: string, id:string){
+    let turnoActualizado = {
+      estado: nuevoEstado,
+    };
+    return this.db.Actualizar(this.turnos, id, turnoActualizado);
+  }
+
   ActualizarProfesional(profesional: Profesional){
     let profesionalActualizado={
       correo: profesional.correo,
@@ -80,5 +107,16 @@ export class ManejadorDbService {
       nombre: nombre
     }
     return this.db.AgregarSinId(this.especialidades, datoAgregar);
+  }
+
+  convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
+  }
+  converHours(inputFormat){
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat)
+    return [pad(d.getHours()), pad(d.getMinutes())].join(':')
   }
 }

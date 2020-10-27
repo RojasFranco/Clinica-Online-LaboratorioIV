@@ -1,0 +1,52 @@
+<div class="container my-4 border p-4">
+    <div class="form-group">
+        <label for="">Buscar por</label>
+        <select name="" id="" class="form-control" [(ngModel)]="tipoBusqueda">
+            <option value="especialidad">Especialidad</option>
+            <option value="profesional">Profesional</option>
+        </select>        
+    </div>
+
+    <div class="form-group" *ngIf="tipoBusqueda=='especialidad'">
+        <label for="selectEsp">Eliga especialidad buscada</label>
+        <select name="esp" id="selectEsp" class="form-control" [(ngModel)]="especialidadElegida">
+            <option *ngFor="let item of especialidades" value={{item}}>{{item}}</option>
+        </select>
+    </div>
+
+    <div class="form-group" *ngIf="tipoBusqueda=='profesional'">
+        <label for="selectProf">Eliga apellido del profesional</label>
+        <select name="prof" id="selectProf" class="form-control" [(ngModel)]="apellidoProfesional">
+            <option *ngFor="let item of todosLosApellidos" value={{item}}>{{item}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <button (click)="BuscarProfesionales()" class="btn btn-info mb-2">Buscar</button>
+        <p *ngIf="mostrarError && !apellidoProfesional || !especialidadElegida" class="text-danger">{{mensajeMostrar}}</p>
+    </div>
+
+    <div *ngIf="listadoProfesionales" class="mb-3">        
+        <app-profesionales-listado [profesionales] = "listadoProfesionales"
+         (eventoElegirProfesional) = "ElegirProfesional($event)"
+         *ngIf="listadoProfesionales.length>0; else noHayProf"></app-profesionales-listado>
+
+         <div class="row justify-content-center">
+            <app-profesionales-detalle class="col-4" [profesional] = "profesionalSeleccionado"></app-profesionales-detalle>
+         </div>
+        <ng-template #noHayProf>
+            <p class="text-danger">No hay profesionales con estos datos requeridos</p>
+        </ng-template>        
+    </div>
+
+
+    <div class="form-group">
+        <label for="">Seleccione fecha y hora del turno</label>
+        <input type="datetime-local" class="form-control" [(ngModel)]="horarioElegido">
+    </div>
+
+    <div class="text-center">
+        <button (click)="Reservar()" class="btn btn-success mb-3">Solicitar turno</button>
+        <p *ngIf="mostrarRta" [ngClass]="claseRta">{{mensajeRta}}</p>
+    </div>
+</div>

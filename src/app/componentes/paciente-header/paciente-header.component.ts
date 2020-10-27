@@ -33,6 +33,14 @@ export class PacienteHeaderComponent implements OnInit {
     }
   }
 
+  PedirTurno(){
+    this.router.navigate(['paciente/pedir-turno']);
+  }
+
+  VerTurnos(){
+    this.router.navigate(['paciente/turnos']);
+  }
+
   async Salir(){
     await this.auth.Desloguear();
     this.router.navigate(['login']);

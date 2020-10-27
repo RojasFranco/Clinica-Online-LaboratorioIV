@@ -1,0 +1,8 @@
+<div class="container-fluid row mt-4">    
+    <div class="col-lg-8">
+        <app-turnos-listado [turnos]="listadoTurnos" (eventoSeleccionarTurno) = "ElegirTurno($event)"></app-turnos-listado>
+    </div>
+    <div class="col">
+        <app-turno-detalle [turno] = "turnoElegido" [puedeCancelar]=true></app-turno-detalle>
+    </div>
+</div>

@@ -23,6 +23,12 @@ import { AdministradorAltaComponent } from './componentes/administrador-alta/adm
 import { ProfesionalesListadoAprobadosComponent } from './componentes/profesionales-listado-aprobados/profesionales-listado-aprobados.component';
 import { ProfesionalesDetalleComponent } from './componentes/profesionales-detalle/profesionales-detalle.component';
 import { ProfesionalNoAprobadoComponent } from './componentes/profesional-no-aprobado/profesional-no-aprobado.component';
+import { ProfesionalesTurnosComponent } from './componentes/profesionales-turnos/profesionales-turnos.component';
+import { PacientePedirTurnoComponent } from './componentes/paciente-pedir-turno/paciente-pedir-turno.component';
+import { TurnosListadoComponent } from './componentes/turnos-listado/turnos-listado.component';
+import { PacienteTurnosComponent } from './componentes/paciente-turnos/paciente-turnos.component';
+import { TurnoDetalleComponent } from './componentes/turno-detalle/turno-detalle.component';
+import { ProfesionalesTurnosPendientesComponent } from './componentes/profesionales-turnos-pendientes/profesionales-turnos-pendientes.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,13 @@ import { ProfesionalNoAprobadoComponent } from './componentes/profesional-no-apr
     AdministradorAltaComponent,
     ProfesionalesListadoAprobadosComponent,
     ProfesionalesDetalleComponent,
-    ProfesionalNoAprobadoComponent
+    ProfesionalNoAprobadoComponent,
+    ProfesionalesTurnosComponent,
+    PacientePedirTurnoComponent,
+    TurnosListadoComponent,
+    PacienteTurnosComponent,
+    TurnoDetalleComponent,
+    ProfesionalesTurnosPendientesComponent
   ],
   imports: [
     BrowserModule,

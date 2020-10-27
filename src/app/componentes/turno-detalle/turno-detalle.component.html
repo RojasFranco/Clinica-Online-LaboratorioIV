@@ -1,0 +1,22 @@
+<div class="text-center">
+    <h2>Detalles del turno</h2>    
+    <div *ngIf="turno; else noEligio">
+        <ul>
+            <li>Fecha: {{turno.horario}}</li>
+            <li>Paciente: {{turno.nombre_paciente}} {{turno.apellido_paciente}}</li>
+            <li>Profesional: {{turno.nombre_profesional}} {{turno.apellido_profesional}}</li>
+            <li>Estado: {{turno.estado}}</li>
+        </ul>
+        <div *ngIf="puedeCancelar">
+            <button (click)="CancelarTurno()" class="btn btn-danger">Cancelar turno</button>
+        </div>
+        <div *ngIf="pedidoProfesionalPendiente" class="row justify-content-around">
+            <button (click)="ConfirmarTurno()" class="btn btn-success">Confirmar</button>
+            <button (click)="RechazarTurno()" class="btn btn-danger">Rechazar</button>
+        </div>
+    </div>    
+    <ng-template #noEligio>
+        <p>No selecciono ningun turno</p>
+    </ng-template>
+    
+</div>

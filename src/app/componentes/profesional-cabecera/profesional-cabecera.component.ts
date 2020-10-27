@@ -14,6 +14,15 @@ export class ProfesionalCabeceraComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  VerTurnos(){
+    this.router.navigate(['profesional/turnos']);
+  }
+
+  VerTurnosPendientes(){
+    this.router.navigate(['profesional/turnos-pendientes']);
+  }
+
+
   async Salir(){
     await this.auth.Desloguear();
     this.router.navigate(['login']);

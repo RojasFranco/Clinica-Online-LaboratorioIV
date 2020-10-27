@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-9">
             <h2 class="text-center">Profesionales pendientes</h2>
-            <app-profesionales-listado (eventoElegirProfesional)="ElegirProfesional($event)" [aprobados] = false></app-profesionales-listado>
+            <app-profesionales-listado (eventoElegirProfesional)="ElegirProfesional($event)" [profesionales]="listadoProfesionales"></app-profesionales-listado>
         </div>
         <div class="col">
             <app-profesionales-detalle [puedeAprobar]=true [profesional] = "profesionalElegido"></app-profesionales-detalle>

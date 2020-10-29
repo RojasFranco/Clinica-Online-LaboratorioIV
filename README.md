@@ -72,3 +72,13 @@ Al ingresar como paciente tendra disponible las siguientes opciones en la cabece
 - Pedir turno en el cual debe seleccionar especialidad, luego profesional y por ultimo elegir horario; o bien, podra elegir por apellido de profesional y luego horario.
 
 ![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/paciente-pedir-turno.png)
+
+## Profesional
+
+Al ingresar como profesional tendra disponible las siguientes opciones en la cabecera:
+
+- Ver turnos confirmados y atendidos
+
+- Ver turnos pendientes, y al clickearlo podra confirmarlo y rechazarlo.
+
+- Definir su horario de atencion

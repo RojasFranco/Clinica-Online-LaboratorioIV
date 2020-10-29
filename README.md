@@ -2,7 +2,7 @@
 
 En esta aplicacion se evalua todos los mecanismos y conocimientos adquiridos en la cursada de la materia, utilizando codigo abierto y la documentacion WEB como bibliografia.
 
-[Link aplicacion] (https://clinica-online-rojas-franco.herokuapp.com)
+[Link aplicacion](https://clinica-online-rojas-franco.herokuapp.com).
 
 ## Descripcion
 
@@ -26,3 +26,4 @@ tener más de una especialidad
 - Paciente: ingresa con dos imágenes de perfil y se verifica la dirección de email.
 - Administrador: se carga solamente por otro administrador,
 además de poder agregar una nueva especialidad en el alta de profesional.
+

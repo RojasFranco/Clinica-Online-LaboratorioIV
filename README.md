@@ -37,7 +37,7 @@ Para registrarse debe completar sus datos, al elegir perfil si elije paciente se
 
 ![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/registro.png)
 
-##Administrador
+## Administrador
 
 Al ingresar como administrador tendra disponible opciones en la cabecera:
 

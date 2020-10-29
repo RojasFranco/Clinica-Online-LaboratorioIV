@@ -39,7 +39,7 @@ Para registrarse debe completar sus datos, al elegir perfil si elije paciente se
 
 ## Administrador
 
-Al ingresar como administrador tendra disponible opciones en la cabecera:
+Al ingresar como administrador tendra disponible las siguientes opciones en la cabecera:
 
 - Ver profesionales actuales
 
@@ -57,3 +57,18 @@ Al ingresar como administrador tendra disponible opciones en la cabecera:
 
 ![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/admin-agregarAdmin.png)
 
+## Paciente
+
+Al ingresar como paciente tendra disponible las siguientes opciones en la cabecera:
+
+- Cambiar foto, al clickear cambiara a su foto alternativa
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/paciente-cambiar-foto.png)
+
+- Ver sus turnos con su estado actual. Al clickearlo podra ver su detalle. En caso de estar confirmado o pendiente se habilitara opcion de cancelar. En caso de estar ya atendido podra ver reseña del profesional y cargar una encuesta.
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/paciente-turnos.png)
+
+- Pedir turno en el cual debe seleccionar especialidad, luego profesional y por ultimo elegir horario; o bien, podra elegir por apellido de profesional y luego horario.
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/paciente-pedir-turno.png)

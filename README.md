@@ -27,3 +27,12 @@ tener más de una especialidad
 - Administrador: se carga solamente por otro administrador,
 además de poder agregar una nueva especialidad en el alta de profesional.
 
+## Login y Registro
+
+Para ingresar a la web debe ingresar su correo y contraseña
+
+(https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/login.png)
+
+Para registrarse debe completar sus datos, al elegir perfil si elije paciente se habilitara la opcion para cargar sus dos imagenes, si elije profesional se habilitaran las especialidades.
+
+(https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/registro.png)

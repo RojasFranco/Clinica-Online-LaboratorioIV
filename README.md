@@ -31,8 +31,29 @@ además de poder agregar una nueva especialidad en el alta de profesional.
 
 Para ingresar a la web debe ingresar su correo y contraseña
 
-![pp](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/login.png)
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/login.png)
 
 Para registrarse debe completar sus datos, al elegir perfil si elije paciente se habilitara la opcion para cargar sus dos imagenes, si elije profesional se habilitaran las especialidades.
 
-(https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/registro.png)
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/registro.png)
+
+##Administrador
+
+Al ingresar como administrador tendra disponible opciones en la cabecera:
+
+- Ver profesionales actuales
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/admin-profesionales.png)
+
+- Ver profesionales pendientes, y poder aprobarlo al seleccionar alguno
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/admin-habilitar-prof.png)
+
+- Agregar nueva especialidad, ademas podra observar las especialidades actuales
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/admin-agregar-especialidad.png)
+
+- Agregar nuevo administrador
+
+![opc](https://github.com/RojasFranco/Clinica-Online-LaboratorioIV/blob/master/imagenes%20Readme/admin-agregarAdmin.png)
+

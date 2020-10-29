@@ -1,0 +1,26 @@
+<div class="container border p-4 my-4">
+    <label class="d-block text-center my-3">Elija los dias</label>
+    <div class="form-check" *ngFor="let item of diasPosibles">        
+        <input type="checkbox" (change)="ElegirCheck($event.target)" class="form-check-input" [value]="item">
+        <label class="form-check-label">{{item}}</label>
+    </div>
+
+    <div class="form-group my-3">
+        <label for="">Elija el horario de inicio</label>
+        <select name="hs" id="" [(ngModel)]="horaInicio">
+            <option *ngFor="let item of horarios" [value]="item">{{item}}</option>
+        </select>
+    </div>
+
+    <div class="form-group my-3">
+        <label for="">Elija el horario de salida</label>
+        <select name="hs" id="" [(ngModel)]="horaFinal">
+            <option *ngFor="let item of horarios" [value]="item">{{item}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" (click)="Guardar()">Guardar</button>
+    </div>
+    <p *ngIf="mostrarMje" [ngClass]="claseMje">{{mensaje}}</p>
+</div>

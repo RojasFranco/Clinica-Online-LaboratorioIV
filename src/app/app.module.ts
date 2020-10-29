@@ -30,6 +30,7 @@ import { PacienteTurnosComponent } from './componentes/paciente-turnos/paciente-
 import { TurnoDetalleComponent } from './componentes/turno-detalle/turno-detalle.component';
 import { ProfesionalesTurnosPendientesComponent } from './componentes/profesionales-turnos-pendientes/profesionales-turnos-pendientes.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ProfesionalDefinirHorarioComponent } from './componentes/profesional-definir-horario/profesional-definir-horario.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     TurnosListadoComponent,
     PacienteTurnosComponent,
     TurnoDetalleComponent,
-    ProfesionalesTurnosPendientesComponent
+    ProfesionalesTurnosPendientesComponent,
+    ProfesionalDefinirHorarioComponent
   ],
   imports: [
     BrowserModule,

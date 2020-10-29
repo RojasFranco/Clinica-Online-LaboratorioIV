@@ -22,6 +22,9 @@ export class ProfesionalCabeceraComponent implements OnInit {
     this.router.navigate(['profesional/turnos-pendientes']);
   }
 
+  DefinirHorario(){
+    this.router.navigate(['profesional/horarios'])
+  }
 
   async Salir(){
     await this.auth.Desloguear();

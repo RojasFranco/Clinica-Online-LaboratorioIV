@@ -7,6 +7,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { PacientePedirTurnoComponent } from './componentes/paciente-pedir-turno/paciente-pedir-turno.component';
 import { PacienteTurnosComponent } from './componentes/paciente-turnos/paciente-turnos.component';
 import { PacienteComponent } from './componentes/paciente/paciente.component';
+import { ProfesionalDefinirHorarioComponent } from './componentes/profesional-definir-horario/profesional-definir-horario.component';
 import { ProfesionalNoAprobadoComponent } from './componentes/profesional-no-aprobado/profesional-no-aprobado.component';
 import { ProfesionalComponent } from './componentes/profesional/profesional.component';
 import { ProfesionalesListadoAprobadosComponent } from './componentes/profesionales-listado-aprobados/profesionales-listado-aprobados.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
     children: [
       {path: 'turnos', component: ProfesionalesTurnosComponent},
       {path: 'turnos-pendientes', component: ProfesionalesTurnosPendientesComponent},
+      {path: 'horarios', component: ProfesionalDefinirHorarioComponent},
     ]},
 
   {path:'administrador', component: AdministradorComponent, canActivate: [AuthGuard],
@@ -62,6 +64,7 @@ const routes: Routes = [
   //   children: [
   //     {path: 'turnos', component: ProfesionalesTurnosComponent},
   //     {path: 'turnos-pendientes', component: ProfesionalesTurnosPendientesComponent},
+  //     {path: 'horarios', component: ProfesionalDefinirHorarioComponent},
   //   ]},
   {path: '', component: LoginComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'},    

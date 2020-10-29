@@ -29,6 +29,7 @@ import { TurnosListadoComponent } from './componentes/turnos-listado/turnos-list
 import { PacienteTurnosComponent } from './componentes/paciente-turnos/paciente-turnos.component';
 import { TurnoDetalleComponent } from './componentes/turno-detalle/turno-detalle.component';
 import { ProfesionalesTurnosPendientesComponent } from './componentes/profesionales-turnos-pendientes/profesionales-turnos-pendientes.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ProfesionalesTurnosPendientesComponent } from './componentes/profesiona
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    RecaptchaModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],

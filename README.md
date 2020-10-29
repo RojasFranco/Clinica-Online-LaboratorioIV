@@ -1,27 +1,28 @@
-# ClinicaOnline
+# Clinica Online
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+En esta aplicacion se evalua todos los mecanismos y conocimientos adquiridos en la cursada de la materia, utilizando codigo abierto y la documentacion WEB como bibliografia.
 
-## Development server
+[Link aplicacion] (https://clinica-online-rojas-franco.herokuapp.com)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Descripcion
 
-## Code scaffolding
+La clínica OnLine, especialista en salud, cuenta
+actualmente con consultorios (6 en la actualidad),
+dos laboratorios (físicos en la clínica), y una sala
+de espera general. Está abierta al público de lunes
+a viernes en el horario de 8:00 a 19:00, y los
+sábados en el horario de 8:00 a 14:00
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Trabajan en ella profesionales de diversas
+especialidades, que ocupan los consultorios acorde a su disponibilidad, y reciben en ellos
+pacientes con turno para consulta o tratamiento. Dichos turnos son pedidos por la web
+seleccionando el profesional o la especialidad .La duración mínima de un turno es 30 minutos.”
+pero los profesionales pueden cambiar la duración según su especialidad. un profesional puede
+tener más de una especialidad
 
-## Build
+## Tipos de usuarios
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Profesional: Puede tener más de una especialidad y el registro lo hace el profesional, necesitando la aprobación de un administrador para empezar a atender en la clinica.
+- Paciente: ingresa con dos imágenes de perfil y se verifica la dirección de email.
+- Administrador: se carga solamente por otro administrador,
+además de poder agregar una nueva especialidad en el alta de profesional.

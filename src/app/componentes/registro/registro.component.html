@@ -51,15 +51,19 @@
                     </div>
                 </div>
             </div>
+        </div>    
+
+        <!-- CAPTCHA -->
+        <div class="row d-flex justify-content-center">
+            <re-captcha (resolved)="resolved($event)" theme="dark" siteKey="6Lf9KtwZAAAAACnLvtMx7k6MiTauK5AbvjxFfng8"></re-captcha>
         </div>
         
-
         <div class="my-4 d-flex justify-content-around ">
             <button type="button" (click)="Registrar()" class="btn btn-success">Registrar</button>
             <button type="button" routerLink="/login" class="btn btn-info">Volver</button>
         </div>
 
-        <p [ngClass]="claseMsje">{{ mensajeMostrar }}</p>
+        <p [ngClass]="claseMsje" class="text-center">{{ mensajeMostrar }}</p>
     </form>
     
 </div>

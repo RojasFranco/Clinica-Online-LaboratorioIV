@@ -17,7 +17,7 @@
         </div>
     </form>
 
-    <p [ngClass]="claseMsje">{{ mensajeMostrar }}</p>
+    <p class="text-center" [ngClass]="claseMsje">{{ mensajeMostrar }}</p>
     <a *ngIf="solicitudReenvio" (click)="ReenviarMail()" class="d-block mt-3">Reenviar Mail de verificacion</a>
 
     <div class="d-flex justify-content-around">

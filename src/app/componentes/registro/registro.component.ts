@@ -27,6 +27,7 @@ export class RegistroComponent implements OnInit {
   coleccionPacientes: string;
   fileFoto: File;
   fileFotoDos: File;
+  respuestaCaptcha: string;
   constructor(private auth: AuthService, private db: ManejadorDbService, private cloud: CloudFirestoreService) {
     this.usuario = new Usuario();
     this.especialidadesElegidas = new Array<string>();
@@ -44,24 +45,30 @@ export class RegistroComponent implements OnInit {
 
   async Registrar(){    
     if(this.usuario.correo && this.usuario.clave && this.usuario.nombre && this.usuario.apellido){
-      if(this.perfilElegido=="paciente"){
-        if(this.urlPrimerImg && this.urlSegundaImg){
-          this.RegistrarFirebase();
+      if(this.respuestaCaptcha){
+        if(this.perfilElegido=="paciente"){
+          if(this.urlPrimerImg && this.urlSegundaImg){
+            this.RegistrarFirebase();
+          }
+          else{
+            this.claseMsje = "alert alert-danger";
+            this.mensajeMostrar = "Debe cargar dos fotos de perfil";
+          }
         }
         else{
-          this.claseMsje = "alert alert-danger";
-          this.mensajeMostrar = "Debe cargar dos fotos de perfil";
+          //  PROFESIONAL
+          if(this.especialidadesElegidas.length==0){
+            this.claseMsje = "alert alert-danger";
+            this.mensajeMostrar = "Debe elegir al menos una especialidad";
+          }
+          else{
+            await this.RegistrarFirebase();
+          }
         }
       }
       else{
-        //  PROFESIONAL
-        if(this.especialidadesElegidas.length==0){
-          this.claseMsje = "alert alert-danger";
-          this.mensajeMostrar = "Debe elegir al menos una especialidad";
-        }
-        else{
-          await this.RegistrarFirebase();
-        }
+        this.claseMsje = "alert alert-danger";
+        this.mensajeMostrar = "Complete el captcha";
       }
     }
     else{
@@ -142,4 +149,8 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  /* CAPTCHA */
+  resolved(captchaResponse: string){
+    this.respuestaCaptcha = captchaResponse;
+  }
 }

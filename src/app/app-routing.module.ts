@@ -4,6 +4,7 @@ import { AdministradorAltaComponent } from './componentes/administrador-alta/adm
 import { AdministradorComponent } from './componentes/administrador/administrador.component';
 import { EspecialidadAgregarComponent } from './componentes/especialidad-agregar/especialidad-agregar.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { ManejadorTurnosComponent } from './componentes/manejador-turnos/manejador-turnos.component';
 import { PacientePedirTurnoComponent } from './componentes/paciente-pedir-turno/paciente-pedir-turno.component';
 import { PacienteTurnosComponent } from './componentes/paciente-turnos/paciente-turnos.component';
 import { PacienteComponent } from './componentes/paciente/paciente.component';
@@ -44,7 +45,6 @@ const routes: Routes = [
       {path: 'alta', component: AdministradorAltaComponent},
   ]},
   {path: 'noAprobado', component: ProfesionalNoAprobadoComponent, canActivate: [AuthGuard]},
-
   
   //    ESTOS PARA PROBAR
   // {path:'administrador', component: AdministradorComponent,

@@ -13,6 +13,8 @@ export class ProfesionalesTurnosPendientesComponent implements OnInit {
 
   listadoTurnos: Array<Turno>;
   turnoElegido: Turno;
+  aux: string;
+  auxArray: Array<string> = [];
   constructor(private auth: AuthService, private db: ManejadorDbService, private cloud: CloudFirestoreService) { }
 
   async ngOnInit(){
@@ -27,7 +29,12 @@ export class ProfesionalesTurnosPendientesComponent implements OnInit {
           turnoAgregar.apellido_profesional = rta.payload.doc.get("apellido_profesional");
           turnoAgregar.nombre_paciente = rta.payload.doc.get("nombre_paciente");
           turnoAgregar.apellido_paciente = rta.payload.doc.get("apellido_paciente");
-          turnoAgregar.horario = rta.payload.doc.get("horario");
+          turnoAgregar.time = rta.payload.doc.get("time");
+          this.aux = (turnoAgregar.time).toString();
+          this.aux = (new Date(parseInt(this.aux))).toLocaleString();
+          this.auxArray = this.aux.split(':');
+          this.auxArray.pop();
+          turnoAgregar.fechaMostrar = this.auxArray.join(':');
           turnoAgregar.correo_paciente = mailProfesional;
           turnoAgregar.estado = rta.payload.doc.get("estado");
           this.listadoTurnos.push(turnoAgregar);          

@@ -15,6 +15,10 @@ export class PacienteTurnosComponent implements OnInit {
   turnosUsuario: Array<Turno>;
   turnoSeleccionado: Turno;
   puedeCancelar: boolean;
+  puedeCargarEncuesta: boolean = false;
+  verResenia: boolean = false;
+  aux: string;
+  auxArray: Array<string> = [];
   constructor(private auth: AuthService, private db: ManejadorDbService, private cloud: CloudFirestoreService) { }
 
   async ngOnInit(){
@@ -29,9 +33,16 @@ export class PacienteTurnosComponent implements OnInit {
           turnoAgregar.apellido_profesional = rta.payload.doc.get("apellido_profesional");
           turnoAgregar.nombre_paciente = rta.payload.doc.get("nombre_paciente");
           turnoAgregar.apellido_paciente = rta.payload.doc.get("apellido_paciente");
-          turnoAgregar.horario = rta.payload.doc.get("horario");
+          turnoAgregar.time = rta.payload.doc.get("time");
+          this.aux = (turnoAgregar.time).toString();
+          this.aux = (new Date(parseInt(this.aux))).toLocaleString();
+          this.auxArray = this.aux.split(':');
+          this.auxArray.pop();
+          turnoAgregar.fechaMostrar = this.auxArray.join(':');          
           turnoAgregar.correo_paciente = this.mailUsuario;
           turnoAgregar.estado = rta.payload.doc.get("estado");
+          turnoAgregar.resenia = rta.payload.doc.get("resenia");
+          turnoAgregar.encuesta = rta.payload.doc.get("encuesta");
           this.turnosUsuario.push(turnoAgregar);
         }
       })
@@ -42,9 +53,15 @@ export class PacienteTurnosComponent implements OnInit {
     this.turnoSeleccionado = turno;
     if(this.turnoSeleccionado.estado == "confirmado" || this.turnoSeleccionado.estado =="pendiente"){
       this.puedeCancelar = true;
+      this.puedeCargarEncuesta = false;
+    }
+    else if(this.turnoSeleccionado.estado=="atendido"){
+      this.puedeCargarEncuesta = true;
+      this.puedeCancelar = false;
     }
     else{
       this.puedeCancelar = false;
+      this.puedeCargarEncuesta = false;
     }
   }
 

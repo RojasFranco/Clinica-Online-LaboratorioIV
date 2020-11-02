@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="form-group">
+        <label for="">Elegir fecha</label>
+        <select name="dia" id="" [(ngModel)]="fechaElegida" (change)="ElegirDia(fechaElegida)" class="form-control">
+            <option *ngFor="let item of fechasMostrar" [value]="item">{{item}}</option>
+        </select>
+    </div>
+
+    <div *ngIf="fechaElegida" class="form-group">
+        <label for="">Elegir horario</label>
+        <select name="hrs" id="" [(ngModel)]="horarioTimeElegido" (change)="ElegirTime()" class="form-control">
+            <option *ngFor="let item of horariosMostrar" [value]="item.time">{{item.hora}}</option>
+        </select>
+    </div>
+</div>

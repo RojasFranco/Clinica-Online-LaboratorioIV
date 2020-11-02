@@ -7,7 +7,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of turnos" (click)="SeleccionarTurno(item)">
-            <td>{{item.horario}}</td>            
+            <td>{{item.fechaMostrar}}</td>            
             <td>{{item.nombre_paciente}} {{item.apellido_paciente}}</td>
             <td>{{item.nombre_profesional}} {{item.apellido_profesional}}</td>
             <td class="text-muted">{{item.estado.toUpperCase()}}</td>            

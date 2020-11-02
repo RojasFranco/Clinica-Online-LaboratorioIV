@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { parse } from 'path';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { CloudFirestoreService } from 'src/app/servicios/cloud-firestore.service';
 import { ManejadorDbService } from 'src/app/servicios/manejador-db.service';
@@ -13,8 +14,8 @@ export class ProfesionalDefinirHorarioComponent implements OnInit {
   diasPosibles =  ['lunes', 'martes','miercoles','jueves','viernes'];
   diasElegidos = [];
   horarios: Array<number>;
-  horaInicio: number;
-  horaFinal: number;
+  horaInicio: string;
+  horaFinal: string;
   mailProfesional: string;
   claseMje: string;
   mensaje: string;
@@ -48,13 +49,19 @@ export class ProfesionalDefinirHorarioComponent implements OnInit {
     this.mostrarMje = true;
     if(this.diasElegidos.length>0){
       if(this.horaInicio && this.horaFinal){
-        let campoAgregar = {
-          dias: this.diasElegidos,
-          franja: [this.horaInicio, this.horaFinal],
-        };
-        this.cloud.Actualizar("usuarios", this.mailProfesional, campoAgregar);
-        this.claseMje = "alert alert-success";
-        this.mensaje = "Horario guardado correctamente";
+        if(parseInt(this.horaInicio)<parseInt(this.horaFinal)){
+          let campoAgregar = {
+            dias: this.diasElegidos,
+            franja: [this.horaInicio, this.horaFinal],
+          };
+          this.cloud.Actualizar("usuarios", this.mailProfesional, campoAgregar);
+          this.claseMje = "alert alert-success";
+          this.mensaje = "Horario guardado correctamente";
+        }
+        else{
+          this.claseMje = "alert alert-danger";
+          this.mensaje = "El horario de salida debe ser mayor al de inicio";
+        }
       }
       else{
         this.claseMje = "alert alert-danger";

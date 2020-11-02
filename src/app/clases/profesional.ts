@@ -4,4 +4,6 @@ export class Profesional {
     aprobado: boolean = false;
     nombre: string;
     apellido: string;
+    dias: Array<string>;
+    franja: Array<string>;
 }

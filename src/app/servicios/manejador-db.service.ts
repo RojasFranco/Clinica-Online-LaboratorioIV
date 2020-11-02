@@ -55,12 +55,13 @@ export class ManejadorDbService {
   }
 
   AgregarTurno(turno: Turno){
-    let fecha = this.convertDate(turno.horario);
-    let hora = this.converHours(turno.horario);
+    // let fecha = this.convertDate(turno.horario);
+    // let hora = this.converHours(turno.horario);
     let turnoAgregar = {
       nombre_paciente: turno.nombre_paciente,
       apellido_paciente: turno.apellido_paciente,
-      horario: fecha+' '+hora,
+      // horario: fecha+' '+hora,
+      time: turno.time,
       correo_profesional: turno.correo_profesional,
       correo_paciente: turno.correo_paciente,
       estado: turno.estado,

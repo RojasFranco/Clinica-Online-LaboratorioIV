@@ -13,7 +13,6 @@ import { ManejadorDbService } from 'src/app/servicios/manejador-db.service';
 })
 export class PacientePedirTurnoComponent implements OnInit {
 
-  horarioElegido;
   tipoBusqueda: string;
   tipoEspecialidad: string;
   especialidades: Array<string>;
@@ -30,6 +29,17 @@ export class PacientePedirTurnoComponent implements OnInit {
 
   profesionalSeleccionado: Profesional;
   listadoProfesionales: Array<Profesional>;  
+
+  // NUEVOS
+  horaInicio= 8;
+  horaFin= 18;
+  fechasMostrar = [];
+  horariosMostrar: Array<{hora: string, time: number}> = [];
+  dias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+  horariosOcupados: Array<string>;
+  horariosLibres: Array<number> = [];
+  fechaElegida: string;
+  horarioTimeElegido: number;
   constructor(private cloud: CloudFirestoreService, private db: ManejadorDbService, private auth:AuthService) {
     this.paciente = new Paciente();
    }
@@ -61,30 +71,40 @@ export class PacientePedirTurnoComponent implements OnInit {
 
   Reservar(){       
     this.mostrarRta = true;
-    if(this.profesionalSeleccionado && this.horarioElegido){      
-      if(this.VerificarHorario(this.horarioElegido)){
-        let date = new Date(this.horarioElegido);      
-        let turno = new Turno();
-        turno.correo_profesional = this.profesionalSeleccionado.correo;
-        turno.horario = date;
-        turno.nombre_paciente = this.paciente.nombre;
-        turno.apellido_paciente = this.paciente.apellido;
-        turno.correo_paciente = this.paciente.correo;
-        turno.nombre_profesional = this.profesionalSeleccionado.nombre;
-        turno.apellido_profesional = this.profesionalSeleccionado.apellido;
-        this.db.AgregarTurno(turno);      this.mostrarRta = true;
+    if(this.profesionalSeleccionado){
+      if(this.horarioTimeElegido){
+        let elementoAgregar = {
+        correo_paciente: this.paciente.correo,
+        correo_profesional: this.profesionalSeleccionado.correo,
+        time: this.horarioTimeElegido,
+        nombre_paciente: this.paciente.nombre,
+        apellido_paciente: this.paciente.apellido,
+        estado: "pendiente",
+        nombre_profesional: this.profesionalSeleccionado.nombre,
+        apellido_profesional: this.profesionalSeleccionado.apellido,
+        };
+        this.cloud.AgregarSinId("turnos", elementoAgregar);
         this.claseRta = "alert alert-success";
         this.mensajeRta = "Turno solicitado exitosamente";
+        setTimeout(() => {
+          this.mostrarRta = false;
+          this.claseRta = "";
+          this.mensajeRta = "";
+          this.profesionalSeleccionado = null;
+          this.fechaElegida = null;
+          this.tipoBusqueda = null;
+          this.listadoProfesionales = null;
+        }, 3000);
       }
       else{
         this.claseRta = "alert alert-danger";
-        this.mensajeRta = "Nuestro horario es de Lunes a Viernes de 08 a 19, y sabados de 08 a 14hs";
-      }
+        this.mensajeRta = "Debe elegir el dia y horario";
+      }        
 
     }
     else{
       this.claseRta = "alert alert-danger";
-      this.mensajeRta = "Debe elegir profesional y fecha del turno";
+      this.mensajeRta = "Primero debe elegir un profesional";
     }
   }
 
@@ -126,6 +146,22 @@ export class PacientePedirTurnoComponent implements OnInit {
 
   ElegirProfesional(profesionalElegido: Profesional){
     this.profesionalSeleccionado = profesionalElegido;
+    if(this.profesionalSeleccionado.franja){
+      this.horaInicio = parseInt(this.profesionalSeleccionado.franja[0]);
+      this.horaFin = parseInt(this.profesionalSeleccionado.franja[1]);
+      this.dias = this.profesionalSeleccionado.dias;
+    }
+    this.cloud.ObtenerTodosTiempoReal("turnos").subscribe(snap=>{
+      this.horariosOcupados = [];
+      snap.forEach(rta=>{
+        if(rta.payload.doc.get("correo_profesional")==this.profesionalSeleccionado.correo){          
+          let horarioOcupado = new Date(parseInt(rta.payload.doc.get("time")));
+          this.horariosOcupados.push(horarioOcupado.toLocaleString());
+        };
+      });
+      this.CargarHsLibres();
+      this.CargarFechasMostrar();
+    });
   }
 
   CompletarProfesional(rtaPayloadDoc): Profesional{
@@ -134,24 +170,63 @@ export class PacientePedirTurnoComponent implements OnInit {
     profesionalAgregar.nombre = rtaPayloadDoc.get("nombre");
     profesionalAgregar.apellido = rtaPayloadDoc.get("apellido");
     profesionalAgregar.especialidades = rtaPayloadDoc.get("especialidades");
+    profesionalAgregar.franja = rtaPayloadDoc.get("franja");
+    profesionalAgregar.dias = rtaPayloadDoc.get("dias");
+
     return profesionalAgregar;
   }
 
-  VerificarHorario(fechaElegida){
-    let date = new Date(fechaElegida);
-    if(date.getDay()!=0){
-      if(date.getDay()==6){
-        if(date.getHours()>8 && date.getHours()<14){
-          return true;
+  CargarHsLibres(){
+    let diaActual = new Date();
+    for (let index = 0; index < 15; index++) {
+      let nuevoDiaNumber = diaActual.setDate(diaActual.getDate()+1);
+      let nuevoDia = new Date(nuevoDiaNumber);
+      nuevoDia.setHours(this.horaInicio, 0, 0);
+      if(nuevoDia.getDay()==6){
+        if(this.dias.includes("sabados")){
+          for (let index = 8; index < 14; index++) {            
+            nuevoDia.setHours(index,0);
+            if(!this.horariosOcupados.includes(nuevoDia.toLocaleString())){
+              this.horariosLibres.push(nuevoDia.getTime());
+            }
+          }
         }
       }
-      else{
-        if(date.getHours()>8 && date.getHours()<19){
-          return true;
+      else if(nuevoDia.getDay()!=0){
+        for (let index = this.horaInicio; index < this.horaFin; index++) {          
+          nuevoDia.setHours(index,0);
+          if(!this.horariosOcupados.includes(nuevoDia.toLocaleString())){
+            this.horariosLibres.push(nuevoDia.getTime());
+          }
         }
       }
     }
-    return false;
+  }
+
+  ElegirDia(fechaString: string){
+    this.horariosMostrar = [];
+    this.horariosLibres.forEach(element => {
+      let date = new Date(element);
+      let fecha = date.toLocaleDateString();
+      if(fechaString==fecha){        
+        let aux = date.toLocaleTimeString().split(':');
+        aux.pop();
+        this.horariosMostrar.push({
+          hora: aux.join(':'),
+          time: date.getTime(),
+        });
+      }
+    });
+  }
+
+  CargarFechasMostrar(){
+    this.horariosLibres.forEach(element => {
+      let date = new Date(element);
+      let fecha = date.toLocaleDateString();
+      if(!this.fechasMostrar.includes(fecha)){
+        this.fechasMostrar.push(fecha);
+      }
+    });
   }
 
 }

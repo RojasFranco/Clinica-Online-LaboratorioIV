@@ -3,6 +3,7 @@
         <app-turnos-listado [turnos] = "turnosUsuario" (eventoSeleccionarTurno)="ElegirTurno($event)"></app-turnos-listado>
     </div>
     <div class="col">
-        <app-turno-detalle [puedeCancelar]="puedeCancelar" [turno] = "turnoSeleccionado"></app-turno-detalle>
+        <app-turno-detalle [puedeCancelar]="puedeCancelar" [turno] = "turnoSeleccionado"
+        [puedeCargarEncuesta]="puedeCargarEncuesta"></app-turno-detalle>
     </div>
 </div>

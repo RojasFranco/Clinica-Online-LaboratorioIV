@@ -33,6 +33,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { ProfesionalDefinirHorarioComponent } from './componentes/profesional-definir-horario/profesional-definir-horario.component';
 import { EncuestaReseniaComponent } from './componentes/encuesta-resenia/encuesta-resenia.component';
 import { ManejadorTurnosComponent } from './componentes/manejador-turnos/manejador-turnos.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ManejadorTurnosComponent } from './componentes/manejador-turnos/manejad
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     RecaptchaModule,

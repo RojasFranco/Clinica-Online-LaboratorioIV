@@ -21,8 +21,8 @@ import { AuthGuard } from './servicios/auth.guard';
 import { ProfesionalGuard } from './servicios/profesional.guard';
 
 const routes: Routes = [
-  {path:'login', component: LoginComponent},
-  {path:'registro', component: RegistroComponent},
+  {path:'login', component: LoginComponent, data: { animation: 'login'}},
+  {path:'registro', component: RegistroComponent, data: { animation: 'register'}},
 
   // ESTOS VAN
   {path:'paciente', component: PacienteComponent, canActivate: [AuthGuard],

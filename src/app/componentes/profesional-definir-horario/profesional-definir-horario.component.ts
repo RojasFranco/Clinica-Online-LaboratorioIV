@@ -26,6 +26,26 @@ export class ProfesionalDefinirHorarioComponent implements OnInit {
 
   async ngOnInit(){
     this.mailProfesional = (await this.auth.ObtenerActual()).email;
+    this.cloud.ObtenerUno("usuarios", this.mailProfesional).subscribe(rta=>{
+      if(rta.get("dias")){
+        this.diasElegidos = rta.get("dias");
+        this.horaInicio = rta.get("franja")[0];
+        this.horaFinal = rta.get("franja")[1];
+        document.getElementsByName("checkDias").forEach(rta=>{
+          if(this.diasElegidos.includes((<HTMLInputElement>rta).value)){
+            rta.setAttribute("checked", "true");
+          }
+        })
+      }
+      else{
+        document.getElementsByName("checkDias").forEach(rta=>{
+          rta.setAttribute("checked", "true");            
+          this.diasElegidos.push((<HTMLInputElement>rta).value);
+        })
+        this.horaInicio = "8";
+        this.horaFinal = "18";
+      }
+    })
   }
 
   CargarHorarios(){

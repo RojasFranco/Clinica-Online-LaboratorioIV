@@ -6,19 +6,18 @@
         <button (click)="ElegirOpcion('nombre_profesional')" class="btn btn-outline-primary mx-1 my-1" id="nombre_profesional" name="botonesOpc">Medico</button>
         <button (click)="ElegirOpcion('especialidad')" class="btn btn-outline-dark mx-1 my-1" id="especialidad" name="botonesOpc">Especialidad</button>
         <button (click)="ElegirOpcion('fecha')" class="btn btn-outline-warning mx-1 my-1" id="fecha" name="botonesOpc">Fecha</button>        
+        <button (click)="ElegirOpcion('estado')" class="btn btn-outline-danger mx-1 my-1" id="estado" name="botonesOpc">Estado</button>
         <div *ngIf="puedeBuscar" class="col-lg-5 m-2 mr-0 form-inline">
             <input type="search" placeholder="Ingrese dato buscado..." [(ngModel)]="textoBuscar" class="form-control">
             <button (click)="Buscar()" class="btn btn-success mx-1">Buscar</button>
         </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-7">
-            <app-turnos-listado [turnos]="listadoTurnos" (eventoSeleccionarTurno)="SeleccionarTurno($event)"></app-turnos-listado>
-        </div>
-        <div class="col">
-            <app-turno-detalle [turno]= "turnoSeleccionado" [esAdmin]=true></app-turno-detalle>
-        </div>
-    </div>        
+    </div>   
 </div>
+<div class="container-fluid row">
+    <div class="col-lg-9 mt-4">
+        <app-turnos-listado [turnos]="listadoTurnos" (eventoSeleccionarTurno)="SeleccionarTurno($event)"></app-turnos-listado>
+    </div>
+    <div class="col my-4">
+        <app-turno-detalle [turno]= "turnoSeleccionado" [esAdmin]=true></app-turno-detalle>
+    </div>
+</div>     

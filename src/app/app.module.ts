@@ -42,6 +42,7 @@ import { InformesComponent } from './componentes/informes/informes.component';
 import { AdministradorTurnosComponent } from './componentes/administrador-turnos/administrador-turnos.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartModule } from 'angular-highcharts';
+import { FechaPipe } from './pipes/fecha.pipe';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ChartModule } from 'angular-highcharts';
     InformesTurnosPorDiaComponent,
     InformesMedicosTurnosComponent,
     InformesComponent,
-    AdministradorTurnosComponent
+    AdministradorTurnosComponent,
+    FechaPipe,
   ],
   imports: [
     BrowserModule,

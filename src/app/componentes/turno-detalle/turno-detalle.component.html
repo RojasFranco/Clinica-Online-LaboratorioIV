@@ -1,7 +1,7 @@
-<div class="text-center">
+<div class="text-center border p-2">
     <h2>Detalles del turno</h2>    
     <div *ngIf="turno; else noEligio">
-        <ul>
+        <ul class="list-unstyled lead">
             <li>Fecha: {{turno.fechaMostrar}}</li>
             <li>Paciente: {{turno.nombre_paciente}} {{turno.apellido_paciente}}</li>
             <li>Profesional: {{turno.nombre_profesional}} {{turno.apellido_profesional}}</li>
@@ -14,22 +14,22 @@
         <div *ngIf="puedeCancelar">
             <button (click)="CancelarTurno()" class="btn btn-danger">Cancelar turno</button>
         </div>
-        <div *ngIf="pedidoProfesionalPendiente" class="row justify-content-around">
-            <button (click)="ConfirmarTurno()" class="btn btn-success">Confirmar</button>
-            <button (click)="RechazarTurno()" class="btn btn-danger">Rechazar</button>
+        <div *ngIf="pedidoProfesionalPendiente">
+            <button (click)="ConfirmarTurno()" class="btn btn-success m-1">Confirmar</button>
+            <button (click)="RechazarTurno()" class="btn btn-danger m-1">Rechazar</button>
         </div>
         <div *ngIf="puedeCargarResenia">
-            <button (click)="CargarReseniaActual()" data-toggle="modal" data-target="#exampleModal" class="btn btn-success mx-1">Cargar reseña</button>
-            <button (click)="VerEncuesta()" class="btn btn-info mx-1" data-toggle="modal" data-target="#encuesta">Ver Encuesta</button>
+            <button (click)="CargarReseniaActual()" data-toggle="modal" data-target="#exampleModal" class="btn btn-success m-1">Cargar reseña</button>
+            <button (click)="VerEncuesta()" class="btn btn-info m-1" data-toggle="modal" data-target="#encuesta">Ver Encuesta</button>
             <!-- <p *ngIf="mostrarMje" [ngClass]="claseMje">{{mensaje}}</p> -->
         </div>
         <div *ngIf="puedeCargarEncuesta">
-            <button (click)="VerResenia()" data-toggle="modal" data-target="#exampleModal" class="btn btn-info mx-1">Ver Reseña</button>
-            <button (click)="CargarEncuestaActual()" data-toggle="modal" data-target="#encuesta" class="btn btn-success mx-1">Cargar Encuesta</button>            
+            <button (click)="VerResenia()" data-toggle="modal" data-target="#exampleModal" class="btn btn-info m-1">Ver Reseña</button>
+            <button (click)="CargarEncuestaActual()" data-toggle="modal" data-target="#encuesta" class="btn btn-success m-1">Cargar Encuesta</button>            
         </div>
         <div *ngIf="esAdmin && turno.estado=='atendido'">
-          <button (click)="VerEncuesta()" class="btn btn-info mx-1" data-toggle="modal" data-target="#encuesta">Ver Encuesta</button>
-          <button (click)="VerResenia()" data-toggle="modal" data-target="#exampleModal" class="btn btn-secondary mx-1">Ver Reseña</button>
+          <button (click)="VerEncuesta()" class="btn btn-info m-1" data-toggle="modal" data-target="#encuesta">Ver Encuesta</button>
+          <button (click)="VerResenia()" data-toggle="modal" data-target="#exampleModal" class="btn btn-secondary m-1">Ver Reseña</button>
         </div>
     </div>    
     <ng-template #noEligio>

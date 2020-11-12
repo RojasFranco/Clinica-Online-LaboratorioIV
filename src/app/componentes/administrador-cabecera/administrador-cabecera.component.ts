@@ -30,6 +30,13 @@ export class AdministradorCabeceraComponent implements OnInit {
     this.router.navigate(["administrador/alta"]);
   }
 
+  IrAInformes(){
+    this.router.navigate(['informes']);
+  }
+
+  VerTurnos(){
+    this.router.navigate(['administrador/turnos']);
+  }
   async Salir(){
     await this.auth.Desloguear();
     this.router.navigate(['login']);

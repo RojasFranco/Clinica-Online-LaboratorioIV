@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdministradorAltaComponent } from './componentes/administrador-alta/administrador-alta.component';
+import { AdministradorTurnosComponent } from './componentes/administrador-turnos/administrador-turnos.component';
 import { AdministradorComponent } from './componentes/administrador/administrador.component';
 import { EspecialidadAgregarComponent } from './componentes/especialidad-agregar/especialidad-agregar.component';
+import { InformesEspecialidadesComponent } from './componentes/informes-especialidades/informes-especialidades.component';
+import { InformesMedicosTurnosComponent } from './componentes/informes-medicos-turnos/informes-medicos-turnos.component';
+import { InformesProfesionalesComponent } from './componentes/informes-profesionales/informes-profesionales.component';
+import { InformesTurnosPorDiaComponent } from './componentes/informes-turnos-por-dia/informes-turnos-por-dia.component';
+import { InformesComponent } from './componentes/informes/informes.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { ManejadorTurnosComponent } from './componentes/manejador-turnos/manejador-turnos.component';
 import { PacientePedirTurnoComponent } from './componentes/paciente-pedir-turno/paciente-pedir-turno.component';
@@ -43,9 +49,16 @@ const routes: Routes = [
       {path:'pendientes', component: ProfesionalesListadoPendientesComponent},
       {path: 'aprobados', component: ProfesionalesListadoAprobadosComponent},
       {path: 'alta', component: AdministradorAltaComponent},
+      {path:'turnos', component: AdministradorTurnosComponent},
   ]},
-  {path: 'noAprobado', component: ProfesionalNoAprobadoComponent, canActivate: [AuthGuard]},
-  
+  {path:'informes', component: InformesComponent, canActivate: [AuthGuard],children:[
+    {path:'logueos', component: InformesProfesionalesComponent},
+    {path: 'especialidad', component: InformesEspecialidadesComponent},
+    {path: 'diaSemana', component: InformesTurnosPorDiaComponent},
+    {path: 'LapsoTiempo', component: InformesMedicosTurnosComponent},
+  ]},
+  {path: 'noAprobado', component: ProfesionalNoAprobadoComponent, canActivate: [AuthGuard]},  
+
   //    ESTOS PARA PROBAR
   // {path:'administrador', component: AdministradorComponent,
   //   children: [

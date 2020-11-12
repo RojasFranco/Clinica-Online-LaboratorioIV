@@ -1,0 +1,9 @@
+.ulNav{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.container{
+    width: 70%;
+}

@@ -6,6 +6,7 @@
             <li>Paciente: {{turno.nombre_paciente}} {{turno.apellido_paciente}}</li>
             <li>Profesional: {{turno.nombre_profesional}} {{turno.apellido_profesional}}</li>
             <li>Estado: {{turno.estado}}</li>
+            <li>Especialidad: {{turno.especialidad}}</li>
         </ul>
         <div *ngIf="puedeAtender" class="my-2">
             <button (click)="Atender()" class="btn btn-success">Atender</button>
@@ -25,6 +26,10 @@
         <div *ngIf="puedeCargarEncuesta">
             <button (click)="VerResenia()" data-toggle="modal" data-target="#exampleModal" class="btn btn-info mx-1">Ver Reseña</button>
             <button (click)="CargarEncuestaActual()" data-toggle="modal" data-target="#encuesta" class="btn btn-success mx-1">Cargar Encuesta</button>            
+        </div>
+        <div *ngIf="esAdmin && turno.estado=='atendido'">
+          <button (click)="VerEncuesta()" class="btn btn-info mx-1" data-toggle="modal" data-target="#encuesta">Ver Encuesta</button>
+          <button (click)="VerResenia()" data-toggle="modal" data-target="#exampleModal" class="btn btn-secondary mx-1">Ver Reseña</button>
         </div>
     </div>    
     <ng-template #noEligio>

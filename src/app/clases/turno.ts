@@ -10,6 +10,7 @@ export class Turno {
     nombre_profesional: string;
     apellido_profesional: string;
     resenia: any;
+    especialidad: string;   // AGREGADO
     encuesta: {
         lugar: string,
         atencion: string,

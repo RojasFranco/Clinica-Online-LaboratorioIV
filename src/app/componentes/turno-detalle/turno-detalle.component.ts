@@ -16,6 +16,7 @@ export class TurnoDetalleComponent implements OnInit {
   @Input() puedeAtender: boolean = false;
   @Input() puedeCargarResenia: boolean = false;
   @Input() puedeCargarEncuesta: boolean = false;
+  @Input() esAdmin: boolean= false;
   edad: string;
   temperatura: string;
   presion: string;

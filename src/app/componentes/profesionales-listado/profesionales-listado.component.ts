@@ -11,6 +11,7 @@ export class ProfesionalesListadoComponent implements OnInit {
 
   @Output() eventoElegirProfesional: EventEmitter<Profesional> = new EventEmitter();
   @Input() profesionales: Array<Profesional>;
+  @Input() horarioPedido: boolean = false;
 
   constructor(private db: CloudFirestoreService) { 
     this.profesionales = new Array<Profesional>();

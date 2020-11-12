@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { CloudFirestoreService } from 'src/app/servicios/cloud-firestore.service';
 import { ManejadorDbService } from 'src/app/servicios/manejador-db.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class LoginComponent implements OnInit {
   claseMsje: string;
   mensajeMostrar: string;
   solicitudReenvio: boolean = false;  
-  constructor(private auth: AuthService, private db: ManejadorDbService, private router: Router) { 
+  constructor(private auth: AuthService, 
+              private db: ManejadorDbService, 
+              private cloud: CloudFirestoreService,
+              private router: Router) { 
     this.usuario = new Usuario();
   }
 
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit {
 
         let userIdentificado = (await this.db.ObtenerUsuario(usuarioActual.email)).data();
         let rolUsuario = userIdentificado.rol;
-
+        
         if(rolUsuario=="paciente"){
           if(await this.auth.VerificoMail()){
             this.router.navigate(['paciente']);
@@ -44,6 +48,14 @@ export class LoginComponent implements OnInit {
           }
         }
         else if(rolUsuario=="profesional"){
+          let agregarLogin = {
+            idCorreoProfesional: usuarioActual.email,
+            hora: Date.now(),
+            nombre: userIdentificado.nombre,
+            apellido: userIdentificado.apellido,
+            especialidades: userIdentificado.especialidades,
+          }
+          this.cloud.AgregarSinId("login-profesionales", agregarLogin);
           this.router.navigate(['profesional']);
         }
         else{ //TODO ADMINISTRADOR

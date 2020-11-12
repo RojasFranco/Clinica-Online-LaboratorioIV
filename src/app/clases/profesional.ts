@@ -6,4 +6,5 @@ export class Profesional {
     apellido: string;
     dias: Array<string>;
     franja: Array<string>;
+    horaLogueo: string; // VER SI NO PRODUCE ERR
 }

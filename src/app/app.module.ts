@@ -34,6 +34,14 @@ import { ProfesionalDefinirHorarioComponent } from './componentes/profesional-de
 import { EncuestaReseniaComponent } from './componentes/encuesta-resenia/encuesta-resenia.component';
 import { ManejadorTurnosComponent } from './componentes/manejador-turnos/manejador-turnos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InformesProfesionalesComponent } from './componentes/informes-profesionales/informes-profesionales.component';
+import { InformesEspecialidadesComponent } from './componentes/informes-especialidades/informes-especialidades.component';
+import { InformesTurnosPorDiaComponent } from './componentes/informes-turnos-por-dia/informes-turnos-por-dia.component';
+import { InformesMedicosTurnosComponent } from './componentes/informes-medicos-turnos/informes-medicos-turnos.component';
+import { InformesComponent } from './componentes/informes/informes.component';
+import { AdministradorTurnosComponent } from './componentes/administrador-turnos/administrador-turnos.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
@@ -62,13 +70,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfesionalesTurnosPendientesComponent,
     ProfesionalDefinirHorarioComponent,
     EncuestaReseniaComponent,
-    ManejadorTurnosComponent
+    ManejadorTurnosComponent,
+    InformesProfesionalesComponent,
+    InformesEspecialidadesComponent,
+    InformesTurnosPorDiaComponent,
+    InformesMedicosTurnosComponent,
+    InformesComponent,
+    AdministradorTurnosComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    HighchartsChartModule,
+    // ChartModule,
     RecaptchaModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule

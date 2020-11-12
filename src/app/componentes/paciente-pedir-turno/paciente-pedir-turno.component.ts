@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { format } from 'path';
 import { Paciente } from 'src/app/clases/paciente';
 import { Profesional } from 'src/app/clases/profesional';
 import { Turno } from 'src/app/clases/turno';
@@ -40,6 +41,13 @@ export class PacientePedirTurnoComponent implements OnInit {
   horariosLibres: Array<number> = [];
   fechaElegida: string;
   horarioTimeElegido: number;
+
+  claseEspecialidad: string;
+  claseProfesionales: string;
+  claseFechas: string;
+  claseHorarios: string;
+  seleccionoAlguno: boolean = false;
+  horaParaMostrar: string;
   constructor(private cloud: CloudFirestoreService, private db: ManejadorDbService, private auth:AuthService) {
     this.paciente = new Paciente();
    }
@@ -68,6 +76,11 @@ export class PacientePedirTurnoComponent implements OnInit {
       });
     });  
   }
+  
+  CargarHorarioDefinitivo(horarioTime: number, hora: string){
+    this.horarioTimeElegido = horarioTime;
+    this.horaParaMostrar = hora;
+  }
 
   Reservar(){       
     this.mostrarRta = true;
@@ -82,19 +95,17 @@ export class PacientePedirTurnoComponent implements OnInit {
         estado: "pendiente",
         nombre_profesional: this.profesionalSeleccionado.nombre,
         apellido_profesional: this.profesionalSeleccionado.apellido,
+        especialidad: this.especialidadElegida,
         };
         this.cloud.AgregarSinId("turnos", elementoAgregar);
         this.claseRta = "alert alert-success";
         this.mensajeRta = "Turno solicitado exitosamente";
+        this.LimpiarElecciones();
         setTimeout(() => {
           this.mostrarRta = false;
           this.claseRta = "";
           this.mensajeRta = "";
-          this.profesionalSeleccionado = null;
-          this.fechaElegida = null;
-          this.tipoBusqueda = null;
-          this.listadoProfesionales = null;
-        }, 3000);
+        }, 3000);                      
       }
       else{
         this.claseRta = "alert alert-danger";
@@ -108,7 +119,9 @@ export class PacientePedirTurnoComponent implements OnInit {
     }
   }
 
-  BuscarProfesionales(){
+  BuscarProfesionales(especialidad){
+    this.especialidadElegida = especialidad;  // new
+    this.seleccionoAlguno = true;
     this.mostrarError = false;
     if(this.especialidadElegida){
       this.cloud.ObtenerTodosTiempoReal("usuarios").subscribe(snap=>{
@@ -123,25 +136,28 @@ export class PacientePedirTurnoComponent implements OnInit {
                this.listadoProfesionales.push(profesionalAgregar);
           }
         });
+        this.claseEspecialidad = "d-none";
+        this.claseProfesionales = "d-block";
       });
     }    
-    else if(this.apellidoProfesional){
-      this.cloud.ObtenerTodosTiempoReal("usuarios").subscribe(snap=>{
-        this.listadoProfesionales = [];
-        snap.forEach(rta=>{
-          if(rta.payload.doc.get("rol")=="profesional" && 
-             rta.payload.doc.get("aprobado")==true &&
-             rta.payload.doc.get("apellido")==this.apellidoProfesional){
-               let profesionalAgregar = this.CompletarProfesional(rta.payload.doc);
-               this.listadoProfesionales.push(profesionalAgregar);
-          }
-        });
-      });
-    }
-    else{
-      this.mostrarError = true;
-      this.mensajeMostrar = "Debe elegir las opciones";
-    }
+    
+    // else if(this.apellidoProfesional){
+    //   this.cloud.ObtenerTodosTiempoReal("usuarios").subscribe(snap=>{
+    //     this.listadoProfesionales = [];
+    //     snap.forEach(rta=>{
+    //       if(rta.payload.doc.get("rol")=="profesional" && 
+    //          rta.payload.doc.get("aprobado")==true &&
+    //          rta.payload.doc.get("apellido")==this.apellidoProfesional){
+    //            let profesionalAgregar = this.CompletarProfesional(rta.payload.doc);
+    //            this.listadoProfesionales.push(profesionalAgregar);
+    //       }
+    //     });
+    //   });
+    // }
+    // else{
+    //   this.mostrarError = true;
+    //   this.mensajeMostrar = "Debe elegir las opciones";
+    // }
   }
 
   ElegirProfesional(profesionalElegido: Profesional){
@@ -161,6 +177,8 @@ export class PacientePedirTurnoComponent implements OnInit {
       });
       this.CargarHsLibres();
       this.CargarFechasMostrar();
+      this.claseProfesionales = "d-none";
+      this.claseFechas = "d-block";
     });
   }
 
@@ -204,6 +222,7 @@ export class PacientePedirTurnoComponent implements OnInit {
   }
 
   ElegirDia(fechaString: string){
+    this.fechaElegida = fechaString;
     this.horariosMostrar = [];
     this.horariosLibres.forEach(element => {
       let date = new Date(element);
@@ -216,6 +235,8 @@ export class PacientePedirTurnoComponent implements OnInit {
           time: date.getTime(),
         });
       }
+      this.claseFechas = "d-none";
+      this.claseHorarios = "d-block";
     });
   }
 
@@ -229,4 +250,31 @@ export class PacientePedirTurnoComponent implements OnInit {
     });
   }
 
+  LimpiarElecciones(){
+    this.claseEspecialidad = "d-block";
+    this.claseProfesionales = "d-none";
+    this.claseFechas = "d-none";
+    this.claseHorarios = "d-none";
+    // this.puedeReservar = false;
+    this.seleccionoAlguno = false;
+    this.especialidadElegida ="";
+    this.profesionalSeleccionado =null;
+    this.fechaElegida = null;
+  }
+
+  VolverEleccionAnterior(){
+    if(this.fechaElegida){
+      this.fechaElegida = null;
+      this.claseHorarios = "d-none";
+      this.claseFechas = "d-block";
+    }
+    else if(this.profesionalSeleccionado){
+      this.profesionalSeleccionado = null;
+      this.claseFechas = "d-none";
+      this.claseProfesionales = "d-block";
+    }
+    else{
+      this.LimpiarElecciones();
+    }
+  }
 }

@@ -1,16 +1,23 @@
+<!-- <div class="form-inline m-2">
+    <input type="search" class="form-control">
+    <button class="btn btn-info mx-2">Buscar</button>
+</div> -->
+
 <table class="table text-center table-hover">
     <thead class="table-secondary">
         <th>Fecha</th>
         <th>Paciente</th>
         <th>Profesional</th>
         <th>Estado</th>
+        <th>Especialidad</th>
     </thead>
     <tbody>
         <tr *ngFor="let item of turnos" (click)="SeleccionarTurno(item)">
             <td>{{item.fechaMostrar}}</td>            
             <td>{{item.nombre_paciente}} {{item.apellido_paciente}}</td>
             <td>{{item.nombre_profesional}} {{item.apellido_profesional}}</td>
-            <td class="text-muted">{{item.estado.toUpperCase()}}</td>            
+            <td class="text-muted">{{item.estado.toUpperCase()}}</td>   
+            <td>{{item.especialidad}}</td>         
         </tr>
     </tbody>
 </table>

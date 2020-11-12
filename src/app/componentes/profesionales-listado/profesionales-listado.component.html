@@ -4,6 +4,7 @@
         <th>Apellido</th>
         <th>Correo</th>
         <th>Especialidad/es</th>
+        <th *ngIf="horarioPedido">Horario Logueo</th>
     </thead>
     <tbody>
         <tr *ngFor="let item of profesionales" (click)="SeleccionarProfesional(item)">
@@ -15,6 +16,7 @@
                     <li>{{ especialidad }}</li>
                 </ul>
             </td>
+            <td *ngIf="horarioPedido"> {{item.horaLogueo}}</td>
         </tr>
     </tbody>
     

@@ -1,0 +1,47 @@
+<!-- 1 A -->
+<div class="container">
+    <h3 class="text-center my-4">Informe por ingreso al sistema</h3>
+    <div class="form-group">
+        <label for="in" class="lead">Fecha inicial</label>
+        <input type="datetime-local" name="in" id="in" class="form-control" [(ngModel)]="horarioInicial">
+    </div>
+    <div class="form-group">
+        <label for="fin" class="lead">Fecha Final</label>
+        <input type="datetime-local" name="fin" [(ngModel)]="horarioFinal" id="fin" class="form-control">
+    </div>
+    <div class="form-group text-center">
+        <button (click)="ObtenerLogueados()" class="btn btn-outline-info">Buscar</button>            
+        <p *ngIf="mostrarMje" [ngClass]="claseMje" class="text-center my-3">{{mensaje}}</p>
+    </div>        
+    <!-- <app-profesionales-listado [profesionales] = "listaPedida" [horarioPedido]=true *ngIf="listaPedida && listaPedida.length>0"></app-profesionales-listado> -->
+    <div *ngIf="listaPedida && listaPedida.length>0">
+        <table id="table" class="table table-info text-center fixed">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Especialidad/es</th>
+                    <th>Horario Logueo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listaPedida">
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.apellido}}</td>
+                    <td>{{ item.correo }}</td>
+                    <td>
+                        <ul *ngFor="let especialidad of item.especialidades">
+                            <li>{{ especialidad }}</li>
+                        </ul>
+                    </td>
+                    <td> {{item.horaLogueo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+    <div *ngIf="listaPedida && listaPedida.length>0" class="row justify-content-center">
+        <button class="btn btn-danger mx-3 my-1" (click)="DescargarPdf()">Descargar PDF</button>
+        <button class="btn btn-success mx-3 my-1" (click)="DescargarExcel()">Descargar EXCEL</button>
+    </div>
+</div>

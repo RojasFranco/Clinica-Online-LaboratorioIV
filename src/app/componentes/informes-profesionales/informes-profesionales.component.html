@@ -1,13 +1,15 @@
 <!-- 1 A -->
 <div class="container">
-    <h3 class="text-center my-4">Informe por ingreso al sistema</h3>
-    <div class="form-group">
-        <label for="in" class="lead">Fecha inicial</label>
-        <input type="datetime-local" name="in" id="in" class="form-control" [(ngModel)]="horarioInicial">
-    </div>
-    <div class="form-group">
-        <label for="fin" class="lead">Fecha Final</label>
-        <input type="datetime-local" name="fin" [(ngModel)]="horarioFinal" id="fin" class="form-control">
+    <h3 class="text-center my-2">Informe por ingreso al sistema</h3>
+    <div class="row">
+        <div class="form-group col">
+            <label for="in" class="lead">Fecha inicial</label>
+            <input type="datetime-local" name="in" id="in" class="form-control" [(ngModel)]="horarioInicial">
+        </div>
+        <div class="form-group col">
+            <label for="fin" class="lead">Fecha Final</label>
+            <input type="datetime-local" name="fin" [(ngModel)]="horarioFinal" id="fin" class="form-control">
+        </div>
     </div>
     <div class="form-group text-center">
         <button (click)="ObtenerLogueados()" class="btn btn-outline-info">Buscar</button>            

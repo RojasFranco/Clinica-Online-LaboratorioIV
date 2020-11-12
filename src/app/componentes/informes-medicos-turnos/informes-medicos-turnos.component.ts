@@ -54,6 +54,7 @@ export class InformesMedicosTurnosComponent implements OnInit {
               }
             }
           });
+          this.Graficar();
           if(this.listaPedida.length==0){
             this.mostrarMje = true;
             this.claseMje = "alert alert-info";
@@ -62,7 +63,7 @@ export class InformesMedicosTurnosComponent implements OnInit {
           else{
             this.mostrarMje = false;
           }
-        })
+        })        
       }
       else{
         this.mostrarMje = true;
@@ -74,7 +75,29 @@ export class InformesMedicosTurnosComponent implements OnInit {
       this.mostrarMje = true;
       this.claseMje = "alert alert-danger";
       this.mensaje = "Debe seleccionar fecha inicial y final";
-    }
+    }    
+  }
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+
+  // public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels = [];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+
+  public barChartData = [
+    // {data: [65, 59, 80, 81, 56, 55, 40], label: 'Dias de la semana'},
+    {data: [], label: 'Cantidad de turnos'},
+  ];
+
+  Graficar(){
+    this.listaPedida.forEach(element => {
+      this.barChartLabels.push(element.medico);
+      this.barChartData[0].data.push(element.cantidad_turnos);
+    });
   }
 
   DescargarPdf(){

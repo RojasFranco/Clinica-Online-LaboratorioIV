@@ -41,7 +41,7 @@ import { InformesMedicosTurnosComponent } from './componentes/informes-medicos-t
 import { InformesComponent } from './componentes/informes/informes.component';
 import { AdministradorTurnosComponent } from './componentes/administrador-turnos/administrador-turnos.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { ChartModule } from 'angular-highcharts';
+import { ChartsModule } from 'ng2-charts';
 import { FechaPipe } from './pipes/fecha.pipe';
 
 @NgModule({
@@ -86,7 +86,7 @@ import { FechaPipe } from './pipes/fecha.pipe';
     AppRoutingModule,
     FormsModule,
     HighchartsChartModule,
-    // ChartModule,
+    ChartsModule,
     RecaptchaModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule

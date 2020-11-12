@@ -16,19 +16,6 @@ export class InformesTurnosPorDiaComponent implements OnInit {
     cantidad_turnos: number,
   }>;
 
-  // chart = new Chart({
-  //   chart: {
-  //     type: 'line'
-  //   },
-  //   title: {
-  //     text: 'Grafico'
-  //   },
-  //   credits: {
-  //     enabled: false
-  //   },
-  //   series: [
-  //   ]
-  // });
   constructor(private cloud: CloudFirestoreService, private manejadorExcel: GenerarExcelService) { }
 
   async ngOnInit(){
@@ -49,8 +36,30 @@ export class InformesTurnosPorDiaComponent implements OnInit {
           this.listaPedida.push({dia:dia, cantidad_turnos:1});
         }
       });
-      // this.chart.addSeries({type: "column" ,data: [22,88]}, true, true);
+      this.Graficar();
     })
+  }
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+
+  // public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels = [];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+
+  public barChartData = [
+    // {data: [65, 59, 80, 81, 56, 55, 40], label: 'Dias de la semana'},
+    {data: [], label: 'Dias de la semana'},
+  ];
+
+  Graficar(){
+    this.listaPedida.forEach(element => {
+      this.barChartLabels.push(element.dia);
+      this.barChartData[0].data.push(element.cantidad_turnos);
+    });
   }
 
   DescargarPdf(){

@@ -1,0 +1,15 @@
+.atendido{
+    color: rgb(23, 165, 23);
+}
+
+.cancelado{
+    color: red;
+}
+
+.pendiente{
+    color: gray;
+}
+
+.confirmado{
+    color: rgb(0, 174, 255);
+}

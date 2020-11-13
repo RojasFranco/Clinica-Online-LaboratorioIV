@@ -75,8 +75,6 @@ export class AdministradorTurnosComponent implements OnInit {
           if(this.buscarPor=="fecha"){
             let auxTime = new Date(parseInt(rta.payload.doc.get("time")));
             datoBuscarBD = auxTime.toLocaleDateString();
-            console.log(this.textoBuscar);
-            console.log(datoBuscarBD);
           }
           else{
             datoBuscarBD = rta.payload.doc.get(this.buscarPor);

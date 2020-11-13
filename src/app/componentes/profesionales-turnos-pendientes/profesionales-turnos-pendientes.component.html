@@ -5,6 +5,7 @@
     <button (click)="ElegirOpcion('especialidad')" class="btn btn-outline-dark mx-1 my-1" id="especialidad" name="botonesOpc">Especialidad</button>
     <button (click)="ElegirOpcion('fecha')" class="btn btn-outline-warning mx-1 my-1" id="fecha" name="botonesOpc">Fecha</button>        
     <button (click)="ElegirOpcion('estado')" class="btn btn-outline-danger mx-1 my-1" id="estado" name="botonesOpc">Estado</button>
+    <button (click)="ElegirOpcion('resenia')" class="btn btn-outline-danger mx-1 my-1" id="resenia" name="botonesOpc">Reseña</button>
     <div *ngIf="puedeBuscar" class="col-lg-5 m-2 mr-0 form-inline">
         <input type="search" placeholder="Ingrese dato buscado..." [(ngModel)]="textoBuscar" class="form-control">
         <button (click)="Buscar()" class="btn btn-success mx-1"><i class="fas fa-search"></i></button>

@@ -111,6 +111,19 @@ export class ProfesionalesTurnosComponent implements OnInit {
               let auxTime = new Date(parseInt(rta.payload.doc.get("time")));
               datoBuscarBD = auxTime.toLocaleDateString();
             }
+            else if(this.buscarPor=="resenia"){
+              if(rta.payload.doc.get("estado")=="atendido"){
+                let resenia = rta.payload.doc.get("resenia");
+                let arrayAux = [];
+                arrayAux.push(resenia.temperatura);
+                arrayAux.push(resenia.presion);
+                arrayAux.push(resenia.edad);
+                datoBuscarBD = arrayAux.join(' ');
+              }
+              else{
+                datoBuscarBD="";
+              }
+            }
             else{
               datoBuscarBD = rta.payload.doc.get(this.buscarPor);
             }

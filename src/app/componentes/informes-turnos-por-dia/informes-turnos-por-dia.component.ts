@@ -67,6 +67,12 @@ export class InformesTurnosPorDiaComponent implements OnInit {
     });    
     autoTable(doc, {html: '#table'});
     doc.save("turnos-dias-"+(new Date()).toLocaleDateString()+".pdf");
+    var canvas = document.getElementById('grafico')  as HTMLCanvasElement;
+    var context = canvas.getContext('2d');
+    var imgData = canvas.toDataURL("image/jpeg", 10.0);
+    var pdf = new jsPDF();
+    pdf.addImage(imgData, "JPEG",0,0,0,0, "alias", 0);
+    pdf.save("grafico"+(new Date()).toLocaleDateString()+".pdf");    
   }
 
   DescargarExcel(){
